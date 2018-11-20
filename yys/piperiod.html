@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+        <title>Title</title>
+        <style>
+            *{
+                margin:0;
+                padding:0;
+                transition:all 1.5s ease-out;
+            }
+            @keyframes cloudMoveL{
+                50%{
+                    transform:translateX(-50px)
+                }
+                100%{
+                    transform:translateX(0px)
+                }
+            }
+            @keyframes cloudMoveR{
+                50%{
+                    transform:translateX(50px)
+                }
+                100%{
+                    transform:translateX(0px)
+                }
+            }
+            @keyframes wheelTipMove{
+                50%{
+                    transform:translateY(50px);
+                }
+                100%{
+                    transform:translateY(0px);
+                }
+            }
+            @keyframes infiniteRotate{
+                100%{
+                    transform:rotate(360deg);
+                }
+            }
+            .bgMoonL,.bgMoonR,.bgBtm>.bgCloudL>.cloudItemLeft,.bgBtm>.bgCloudL>.cloudItemRight,
+            .bgBtm>.bgCloudC>.cloudItemLeft,.bgBtm>.bgCloudC>.cloudItemRight,.bgBtm>.bgCloudR>.cloudItemLeft,
+            .bgBtm>.bgCloudR>.cloudItemRight,.bgBtm>.bgFlower,.view>.viewAll>.viewLeft>.Japanese>div,
+            .view>.viewAll>.viewLeft>.labelContainer,.view>.viewAll>.viewLeft>.title>.desc,
+            .view>.viewAll>.viewLeft>.title>.wheelTip>.mouse,.view>.viewAll>.viewLeft>.title>.wheelTip>.text,
+            .view>.viewAll>.viewLeft>.title>.videoIcon>.vOuterCircle,.view>.viewAll>.viewLeft>.title>.videoIcon>.vOuterCircle>.vInnerCircle,
+            .view>.viewAll>.viewLeft>.title>.videoIcon>.vPlay,.view>.viewAll>.viewLeft>.labels>div>div>div,
+            .leftTitle>.x,.leftTitle>.dcrt,.rightBtn>.toIndex,.rightBtn>.share,.dropMenu>.icon,
+            .view>.viewAll>.carousel>div>.more>.bgMore,.crsBtns>span{
+                background:url("img/index/index.png") no-repeat;
+            }
+            .overflow{
+                overflow: hidden;
+            }
+            .floatR{
+                float:right;
+            }
+            .floatL{
+                float:left;
+            }
+            .fade{
+                opacity:0;
+            }
+            .bg,.view{
+                width:100%;
+                height:990px;
+            }
+            .bg>div{
+                position:absolute;
+                height:100%;
+            }   
+            .bgTop{
+                background: url("img/bg/bg_top.png") repeat-x;
+                width:100%;
+                height:990px;
+            }
+            .bgMoon{
+                width:3620px;
+                position:absolute;
+                left:3910px;
+                top:80px;
+            }
+            .bgTop .bgMoon .bgMoonL{
+                width:220px;
+                height:220px;
+                background-position: -340px 0px;
+                transform:translateY(400px);
+                transition:all 2s;
+            }
+            .bgTop .bgMoon .bgMoonR{
+                width:204px;
+                height:204px;
+                background-position: -560px 0px;
+                transform:translateY(300px);
+                transition:all 2s;
+            }
+            .bgBtm{
+                background: url("img/bg/bg_btm.png");
+                width: 7340px;
+                left:2500px;
+                top:30px;
+            }
+            .bgBtm>.bgCloudL{
+                width:1350px;
+                height:162px;
+                position:absolute;
+                top:100px;
+                left: 700px; 
+            }
+            .bgBtm>.bgCloudL>.cloudItemLeft{
+                width:800px;
+                height:80px;
+                background-position:0 -786px;;
+                position:absolute;
+                left:0;
+                bottom:0;
+            }
+            .bgBtm>.bgCloudL>.cloudItemRight,.bgBtm>.bgCloudC>.cloudItemRight{
+                width:550px;
+                height:80px;
+                background-position:0 -1000px;
+                position:absolute;
+                right:0;
+                top:0;
+            }
+            .bgBtm>.bgCloudC{
+                width:1150px;
+                height:132px;
+                position:absolute;
+                top:60px;
+                left:2500px; 
+            }
+            .bgBtm>.bgCloudC>.cloudItemLeft{
+                width:580px;
+                height:50px;
+                background-position:-275px -935px;
+                position:absolute;
+                left:0;
+                bottom:0;
+            }
+            .bgBtm>.bgCloudR{
+                width:1380px;
+                height:120px;
+                position:absolute;
+                top:60px;
+                left:4260px; 
+            }
+            .bgBtm>.bgCloudR>.cloudItemLeft{
+                width:600px;
+                height:100px;
+                background-position:0px -688px;
+                position:absolute;
+                left:0;
+                top:0;
+            }
+            .bgBtm>.bgCloudR>.cloudItemRight{
+                width:620px;
+                height:80px;
+                background-position:0px -850px;
+                position:absolute;
+                right:0;
+                bottom:0;
+            }
+            .bgBtm .cloudItemLeft{
+                animation:cloudMoveL 5s linear infinite;
+            }
+            .bgBtm .cloudItemRight{
+                animation:cloudMoveR 5s linear infinite;
+            }
+            .bgBtm>.bgFlower{
+                width:255px;
+                height:180px;
+                transform-origin:100% 0;
+                transform:scale(0);
+                position:absolute;
+                left:4705px;
+                top:150px;
+                background-position:-260px -492px;
+                transition:all 1s 1.5s;
+                z-index:10;
+            }
+            .bgCenter{
+                background: url("img/bg/bg_center.png");
+                width:8553px;
+                left:3000px;
+                top:30px;
+            }
+            .view{
+                position: absolute;
+                top:0;
+            }
+            .viewAll{
+                width:10667px;
+                position:relative;
+            }
+            .viewLeft{
+                background:url("img/view/view_left.png");
+                width:3978px;
+                height:990px;
+                position:absolute;
+                left:0;
+            }
+            .view>.viewAll>.viewLeft>.Japanese{
+                position:absolute;
+                top:0;
+                left:0;
+                width:800px;
+                height:990px;
+            }
+            .view>.viewAll>.viewLeft>.Japanese>div{
+                transition:all 2.5s;
+            }
+            .view>.viewAll>.viewLeft>.Japanese>.font1{
+                width:260px;
+                height:180px;
+                background-position:0 -500px;
+                position:absolute;
+                left:250px;
+                top:60px;
+            }
+            .view>.viewAll>.viewLeft>.Japanese>.font2{
+                width:132px;
+                height:150px;
+                background-position:-120px -352px;
+                position:absolute;
+                left:340px;
+                top:500px;
+            }
+            .view>.viewAll>.viewLeft>.Japanese>.font3{
+                width:166px;
+                height:200px;
+                background-position:-340px -220px;
+                position:absolute;
+                left:600px;
+                top:180px;
+            }
+            .view>.viewAll>.viewLeft>.Japanese>.font4{
+                width:114px;
+                height:120px;
+                background-position:-514px -496px;
+                position:absolute;
+                left:460px;
+                top:780px;
+            }
+            .view>.viewAll>.viewLeft>.Japanese>.font5{
+                width:84px;
+                height:80px;
+                background-position:-780px -110px;
+                position:absolute;
+                left:250px;
+                top:360px;
+            }
+            .view>.viewAll>.viewLeft>.Japanese>.font6{
+                width:64px;
+                height:80px;
+                background-position:-894px -110px;
+                position:absolute;
+                left:250px;
+                top:730px;
+            }
+            .view>.viewAll>.viewLeft>.Japanese>.font7{
+                width:66px;
+                height:50px;
+                background-position:-1080px -606px;
+                position:absolute;
+                left:600px;
+                top:500px;
+            }
+            .view>.viewAll>.viewLeft>.title{
+                width:200px;
+                position: absolute;
+                left:360px;
+                top:350px;
+                display:flex;
+                justify-content:space-between;
+            }
+            .view>.viewAll>.viewLeft>.title>.wheelTip{
+                margin-top:50px;
+                margin-right:40px;
+                animation:wheelTipMove 2s linear infinite;
+            }
+            .view>.viewAll>.viewLeft>.title>.wheelTip>.mouse{
+                width: 20px;
+                height:30px;
+                background-position: -726px -280px;
+            }
+            .view>.viewAll>.viewLeft>.title>.wheelTip>.text{
+                width: 20px;
+                height:186px;
+                background-position: -556px -202px;
+                margin-top:4px;
+            }   
+            .view>.viewAll>.viewLeft>.title>.desc{
+                width: 126px;
+                height:360px;
+                background-position: -128px 0;
+                opacity:0;
+                transform: translateY(-50px);
+            }
+            .view>.viewAll>.viewLeft>.title>.videoIcon{
+                width:60px;
+                height:60px;
+                position:absolute;
+                right:2px;
+                top:194px;
+                opacity:0;
+            }
+            .view>.viewAll>.viewLeft>.title>.videoIcon:hover{
+                cursor:pointer;
+            }
+            .view>.viewAll>.viewLeft>.title>.videoIcon>.vOuterCircle{
+                width:56px;
+                height:54px;
+                position:absolute;
+                right:2px;
+                top:3px;
+                background-position:-1096px -406px;
+                animation: infiniteRotate 2s linear infinite reverse;
+            }   
+            .view>.viewAll>.viewLeft>.title>.videoIcon>.vOuterCircle>.vInnerCircle{
+                width:48px;
+                height:50px;
+                position:absolute;
+                right:4px;
+                top:2px;
+                background-position:-1002px -934px;
+                animation: infiniteRotate 1s linear infinite;
+            }
+            .view>.viewAll>.viewLeft>.title>.videoIcon>.vPlay{
+                width:14px;
+                height:18px;
+                position:absolute;
+                right:20px;
+                top:22px;
+                background-position:-1111px -582px;
+            }
+            .view>.viewAll>.viewLeft>.labelContainer{
+                width:386px;
+                height:108px;
+                position:absolute;
+                left:768px;
+                top:444px;
+                opacity:0;
+                transform: translateX(-50px);
+                background-position:-764px 0px;
+            }
+            .view>.viewAll>.viewLeft>.labels{
+                width:1300px;
+                height:990px;
+                position:absolute;
+                left:1040px;
+                top:0;
+            }
+            .view>.viewAll>.viewLeft>.labels>div{
+                width:100%;
+                height:100%;
+                opacity:0;
+            }
+            .view>.viewAll>.viewLeft>.labels>div>div{
+                position:absolute;
+                left:0;
+                top:458px;
+                transform-origin:50% 50%;
+                transition:all 1.5s ease-out;
+            }
+            .view>.viewAll>.viewLeft>.labels>div>div>div{
+                transform-origin:50% 50%;
+                transition:all 1.5s ease-out;
+                transform:scale(0.5);
+            }
+            .view>.viewAll>.viewLeft>.labels>.first>div>.label-1{
+                width:240px;
+                height:66px;
+                background-position:-878px -688px; 
+            }
+            .view>.viewAll>.viewLeft>.labels>.first>div>.label-2{
+                width:274px;
+                height:66px;
+                background-position:0px -934px; 
+            }
+            .view>.viewAll>.viewLeft>.labels>.first>div>.label-3{
+                width:114px;
+                height:66px;
+                background-position:-638px -496px; 
+            }
+            .view>.viewAll>.viewLeft>.labels>.first>div>.label-4{
+                width:160px;
+                height:66px;
+                background-position:-800px -788px; 
+            }
+            .view>.viewAll>.viewLeft>.labels>.first>div>.label-5{
+                width:160px;
+                height:66px;
+                background-position:-960px -788px; 
+            }
+            .view>.viewAll>.viewLeft>.labels>.first>div>.label-6{
+                width:210px;
+                height:66px;
+                background-position:-840px -866px; 
+            }
+            .view>.viewAll>.viewLeft>.labels>.first>div>.label-7{
+                width:160px;
+                height:66px;
+                background-position:-800px -788px; 
+            }
+            .view>.viewAll>.viewLeft>.labels>.first>div>.label-8{
+                width:140px;
+                height:66px;
+                background-position:-560px -387px; 
+            }
+            .view>.viewAll>.viewLeft>.labels>.second>div>.label-1{
+                width:170px;
+                height:66px;
+                background-position:-900px -208px; 
+            }
+            .view>.viewAll>.viewLeft>.labels>.second>div>.label-2{
+                width:288px;
+                height:66px;
+                background-position:-764px -274px; 
+            }
+            .view>.viewAll>.viewLeft>.labels>.second>div>.label-3{
+                width:206px;
+                height:66px;
+                background-position:-904px -538px; 
+            }
+            .view>.viewAll>.viewLeft>.labels>.second>div>.label-4{
+                width:184px;
+                height:66px;
+                background-position:-764px -407px; 
+            }
+            .view>.viewAll>.viewLeft>.labels>.second>div>.label-5{
+                width:214px;
+                height:66px;
+                background-position:-764px -472px; 
+            }
+            .view>.viewAll>.viewLeft>.labels>.second>div>.label-6{
+                width:266px;
+                height:66px;
+                background-position:-612px -688px; 
+            }
+            .view>.viewAll>.viewLeft>.labels>.second>div>.label-7{
+                width:84px;
+                height:66px;
+                background-position:-1054px -274px; 
+            }
+            .view>.viewAll>.viewLeft>.labels>.second>div>.label-8{
+                width:172px;
+                height:66px;
+                background-position:-764px -340px; 
+            }
+            .view>.viewAll>.viewLeft>.labels>.third>div>.label-1{
+                width:116px;
+                height:66px;
+                background-position:-784px -207px; 
+            }
+            .view>.viewAll>.viewLeft>.labels>.third>div>.label-2{
+                width:266px;
+                height:66px;
+                background-position:-612px -688px; 
+            }
+            .view>.viewAll>.viewLeft>.labels>.third>div>.label-3{
+                width:184px;
+                height:66px;
+                background-position:-936px -340px; 
+            }
+            .view>.viewAll>.viewLeft>.labels>.third>div>.label-4{
+                width:184px;
+                height:66px;
+                background-position:-764px -604px; 
+            }
+            .view>.viewAll>.viewLeft>.labels>.third>div>.label-5{
+                width:216px;
+                height:66px;
+                background-position:-624px -868px; 
+            }
+            .view>.viewAll>.viewLeft>.labels>.third>div>.label-6{
+                width:160px;
+                height:66px;
+                background-position:-800px -788px; 
+            }
+            .view>.viewAll>.viewLeft>.labels>.third>div>.label-7{
+                width:146px;
+                height:66px;
+                background-position:-950px -404px; 
+            }
+            .view>.viewAll>.viewLeft>.labels>.third>div>.label-8{
+                width:206px;
+                height:66px;
+                background-position:-904px -538px; 
+            }
+            .viewRight{
+                background:url("img/view/view_right.png");
+                width:6689px;
+                height:990px;
+                position:absolute;
+                right:0;
+            }
+            .view>.viewAll>.viewRight>.jqqdContainer{
+                position:absolute;
+                right:620px;
+                top:300px;
+            }
+            .view>.viewAll>.viewRight>.jqqdContainer>img{
+                vertical-align: top;
+            }
+            .view>.viewAll>.viewRight>.jqqdContainer>img:last-child{
+                margin-top: 100px;
+                margin-left:100px;
+            }
+            .view>.viewAll>.carousel{
+                width:53%;
+                position:absolute;
+                left:3300px;
+                top:220px;
+                display:flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-flow:row nowrap;
+                z-index:0;
+            }
+            .view>.viewAll>.carousel>div{
+                width: 864px;
+                position:relative;
+                display:flex;
+                justify-content: center;
+            }
+            .view>.viewAll>.carousel>div>.intr{
+                margin-right:160px;
+                z-index:1;
+            }
+            .view>.viewAll>.carousel>div>.r{
+                position:absolute;
+            }
+            .view>.viewAll>.carousel>.item3>.r{
+                margin-top:-60px;
+            }
+            .view>.viewAll>.carousel>.item5>.r{
+                margin-top:38px;
+            }
+            .view>.viewAll>.carousel>.item6>.r{
+                margin-top:80px;
+            }
+            .view>.viewAll>.carousel>.item7>.r{
+                margin-top:20px;
+            }
+            .view>.viewAll>.carousel>div>.more{
+                position:relative;
+                width:170px;
+                height:160px;
+                margin-left:140px;
+                margin-top:340px;
+                z-index:1;
+            }
+            .view>.viewAll>.carousel>div>div:nth-child(2){
+                transform:translateY(-100px);
+                opacity:0;
+                transition:all 1s ;
+            }
+            .view>.viewAll>.carousel>div>div:not(:nth-child(2)){
+                transform:translateY(-100px);
+                opacity:0;
+                transition:all 1s  1s;
+            }
+            .view>.viewAll>.carousel>div>.more>.bgMore{
+                position:relative;
+                margin:20px auto;
+                width:18px;
+                height:107px;
+                background-position:-764px -100px;
+                z-index:1;
+            }
+            .view>.viewAll>.carousel>div>.more>.mk{
+                width:100px;
+                height:100px;
+                border-radius:50%;
+                position:absolute;
+                top:0;
+                left:0;
+                background:rgba(191, 169, 117,0.5);
+                z-index:0;
+                transition:none;
+            }
+            .view>.viewAll>.carousel>div>div:last-child{
+                position:absolute;
+                right:78px;
+                width:170px;
+                height:160px;
+                margin-left:140px;
+                margin-top:340px;
+                z-index:1;
+            }
+            .crsShow{
+                transform:translateY(0px);
+                opacity:1;
+            }
+            .view>.viewAll>.carousel>div.crsShow>div:nth-child(2){
+                transform:translateY(0px);
+                opacity:1;
+                transition:all 1s ;
+            }
+            .view>.viewAll>.carousel>div.crsShow>div:not(:nth-child(2)){
+                transform:translateY(0px);
+                opacity:1;
+                transition:all 1s 0.4s;
+            }
+            .leftTitle{
+                position:fixed;
+                width:80px;
+                height:300px;
+                top:70px;
+                left:20px;
+                opacity: 0;
+                transform:translateY(-50px);
+                display:flex;
+                flex-flow:column nowrap;
+                align-items: center;
+            }
+            .leftTitle>.artFont{
+                width:60px;
+                height:156px;
+                background:url("img/index/75.webp") no-repeat ;
+                background-size:contain;
+            }
+            .leftTitle>.x{
+                width:16px;
+                height:16px;
+                margin:24px 0;
+                background-position:-1118px -522px;
+            }
+            .leftTitle>.dcrt{
+                width:80px;
+                height:80px;
+                background-position:-1000px -108px;
+            }
+            .rightBtn{
+                width:82px;
+                height:147px;
+                position:fixed;
+                top:70px;
+                right:10px;
+                display:flex;
+                flex-flow:row nowrap;
+                justify-content:space-around;
+            }
+            .rightBtn>.toIndex{
+                width:16px;
+                height:60px;
+                background-position:-1128px -204px;
+            }
+            .rightBtn>.share{
+                width:16px;
+                height:100px;
+                background-position:-872px -106px;
+            }
+            .dropMenu{
+                position:fixed;
+                top:50%;
+                right:30px;
+            }
+            .dropMenu>.icon{
+                width:34px;
+                height:14px;
+                background-position:-763px -670px;
+            }
+            .crsBtns{
+                display:flex;
+                justify-content: center;
+                align-items: center;
+                width:500px;
+                height:52px;
+                position:fixed;
+                left:0;
+                right:0;
+                margin:0 auto;
+                bottom:80px;
+            }
+            .crsBtns>span{
+                vertical-align:center;
+                display:inline-block;
+                width:12px;
+                height:12px;
+                background-position:-1121px -394px;
+                margin:0 15px;
+                cursor:pointer;
+                transition:none;
+            }
+            .crsBtns>span.on{
+                width:52px;
+                height:52px;
+                cursor:default;
+            }
+            .crsBtns>.crsBtn1.on{
+                background-position:-700px -387px;
+            }
+            .crsBtns>.crsBtn2.on{
+                background-position:-253px -362px;
+            }
+            .crsBtns>.crsBtn3.on{
+                background-position:-253px -258px;
+            }
+            .crsBtns>.crsBtn4.on{
+                background-position:-1049px -867px;
+            }
+            .crsBtns>.crsBtn5.on{
+                background-position:-688px -563px;
+            }
+            .crsBtns>.crsBtn6.on{
+                background-position:-636px -563px;
+            }
+            .crsBtns>.crsBtn7.on{
+                background-position:-253px -414px;
+            }
+            .crsBtns>.crsBtn8.on{
+                background-position:-253px -310px;
+            }
+        </style>
+	</head>
+	<body class="overflow">
+        <!--背景-->
+        <div id="bg" class="bg">
+            <div class="bgTop overflow"> 
+                <div class="bgMoon">   
+                    <div class="bgMoonL floatL"></div>
+                    <div class="bgMoonR floatR"></div> 
+                </div>
+            </div>
+            <div class="bgBtm">
+                <div class="bgCloudL">
+                    <div class="cloudItemLeft"></div>
+                    <div class="cloudItemRight"></div>
+                </div>
+                <div class="bgCloudC">
+                    <div class="cloudItemLeft"></div>
+                    <div class="cloudItemRight"></div>
+                </div>
+                <div class="bgCloudR">
+                    <div class="cloudItemLeft"></div>
+                    <div class="cloudItemRight"></div>
+                </div>
+                <div class="bgFlower"></div>
+            </div>
+            <div class="bgCenter">
+            </div>
+        </div>
+        <!--主体-->
+        <div id="view" class="overflow view" >
+            <div class="viewAll">
+                <div class="viewLeft">
+                    <!--闪烁的日本文字-->
+                    <div class="Japanese">
+                        <div class="font1 fade"></div>
+                        <div class="font2 fade"></div>
+                        <div class="font3 fade"></div>
+                        <div class="font4 fade"></div>
+                        <div class="font5 fade"></div>
+                        <div class="font6 fade"></div>
+                        <div class="font7 fade"></div>
+                    </div>
+                    <!--左侧标题文字-->
+                    <div class="title">
+                        <div class="wheelTip">
+                            <div class="mouse"></div>
+                            <div class="text"></div>
+                        </div>
+                        <div class="desc"></div>
+                        <div class="videoIcon">
+                            <div class="vOuterCircle">
+                                <div class="vInnerCircle"></div>
+                            </div>
+                            <div class="vPlay"></div>
+                        </div>
+                    </div>
+                    <!--标签-->
+                        <!--标签-->
+                    <div class="labels">
+                            <!--第一批-->
+                            <div class="first">
+                                <div>
+                                    <div class="label-1"></div>
+                                </div>
+                                <div>
+                                    <div class="label-2"></div>
+                                </div>
+                                <div>
+                                    <div class="label-3"></div>
+                                </div>
+                                <div>
+                                    <div class="label-4"></div>
+                                </div>
+                                <div>
+                                    <div class="label-5"></div>
+                                </div>
+                                <div>
+                                    <div class="label-6"></div>
+                                </div>
+                                <div>
+                                    <div class="label-7"></div>
+                                </div>
+                                <div>
+                                    <div class="label-8"></div>
+                                </div>
+                            </div>
+                            <!--第二批-->
+                            <div class="second">
+                                <div>
+                                    <div class="label-1"></div>
+                                </div>
+                                <div>
+                                    <div class="label-2"></div>
+                                </div>
+                                <div>
+                                    <div class="label-3"></div>
+                                </div>
+                                <div>
+                                    <div class="label-4"></div>
+                                </div>
+                                <div>
+                                    <div class="label-5"></div>
+                                </div>
+                                <div>
+                                    <div class="label-6"></div>
+                                </div>
+                                <div>
+                                    <div class="label-7"></div>
+                                </div>
+                                <div>
+                                    <div class="label-8"></div>
+                                </div>
+                            </div>
+                            <!--第三批-->
+                            <div class="third">
+                                <div>
+                                    <div class="label-1"></div>
+                                </div>
+                                <div>
+                                    <div class="label-2"></div>
+                                </div>
+                                <div>
+                                    <div class="label-3"></div>
+                                </div>
+                                <div>
+                                    <div class="label-4"></div>
+                                </div>
+                                <div>
+                                    <div class="label-5"></div>
+                                </div>
+                                <div>
+                                    <div class="label-6"></div>
+                                </div>
+                                <div>
+                                    <div class="label-7"></div>
+                                </div>
+                                <div>
+                                    <div class="label-8"></div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="labelContainer"></div>
+                        <!--标签筒子-->
+                </div>
+                <div class="viewRight">
+                    <div class="jqqdContainer">
+                        <img src="img/view_right/txt_jqqd.png">
+                        <img src="img/view_right/dtg.png">
+                    </div>
+                </div>
+                <div class="carousel">
+                    <div class="item1">
+                        <diV class="intr">
+                            <img src="img/character/guishibai/txt.png" alt="">
+                        </diV>
+                        <div class="r">
+                            <img src="img/character/guishibai/1.png" alt="">
+                        </div>
+                        <div class="more">
+                            <div class="bgMore"></div>
+                            <div class="mk"></div>
+                        </div>
+                        <div></div>
+                    </div>
+                    <div class="item2">
+                        <div class="intr">
+                            <img src="img/character/guishihei/txt.png" alt="">
+                        </div>
+                        <div class="r">
+                            <img src="img/character/guishihei/2.png" alt="">
+                        </div>
+                        <div class="more">
+                            <div class="bgMore"></div>
+                            <div class="mk"></div>
+                        </div>
+                        <div></div>
+                    </div>
+                    <div class="item3">
+                        <div class="intr">
+                            <img src="img/character/jiutuntongzi/txt.png" alt="">
+                        </div>
+                        <div class="r">
+                            <img src="img/character/jiutuntongzi/3.png" alt="">
+                        </div>
+                        <div class="more">
+                            <div class="bgMore"></div>
+                            <div class="mk"></div>
+                        </div>
+                        <div></div>
+                    </div>
+                    <div class="item4">
+                        <div class="intr">
+                            <img src="img/character/shantu/txt.png" alt="">
+                        </div>
+                        <div class="r">
+                            <img src="img/character/shantu/4.png" alt="">
+                        </div>
+                        <div class="more">
+                            <div class="bgMore"></div>
+                            <div class="mk"></div>
+                        </div>
+                        <div></div>
+                    </div>
+                    <div class="item5">
+                        <div class="intr">
+                            <img src="img/character/xiaolunan/txt.png" alt="">
+                        </div>
+                        <div class="r">
+                            <img src="img/character/xiaolunan/5.png" alt="">
+                        </div>
+                        <div class="more">
+                            <div class="bgMore"></div>
+                            <div class="mk"></div>
+                        </div>
+                        <div></div>
+                    </div>
+                    <div class="item6">
+                        <div class="intr">
+                            <img src="img/character/xuetongzi/txt.png" alt="">
+                        </div>
+                        <div class="r">
+                            <img src="img/character/xuetongzi/6.png" alt="">
+                        </div>
+                        <div class="more">
+                            <div class="bgMore"></div>
+                            <div class="mk"></div>
+                        </div>
+                        <div></div>
+                    </div>
+                    <div class="item7">
+                        <div class="intr">
+                            <img src="img/character/yingcao/txt.png" alt="">
+                        </div>
+                        <div class="r">
+                            <img src="img/character/yingcao/7.png" alt="">
+                        </div>
+                        <div class="more">
+                            <div class="bgMore"></div>
+                            <div class="mk"></div>
+                        </div>
+                        <div></div>
+                    </div>   
+                </div>
+            </div>
+        </div>
+        <!--固定界面-->
+        <div class="leftTitle">
+            <div class="artFont"></div>
+            <div class="x"></div>
+            <div class="dcrt"></div>
+        </div>
+        <div class="bottomIcon"></div>
+        <div class="rightBtn">
+            <div class="share"></div>
+            <div class="toIndex"></div>
+        </div>
+        <div class="dropMenu">
+            <div class="icon"></div>
+            <div class="bgcircle"></div>
+        </div>
+        <div class="crsBtns">
+            <span class="crsBtn1 on"></span>
+            <span class="crsBtn2"></span>
+            <span class="crsBtn3"></span>
+            <span class="crsBtn4"></span>
+            <span class="crsBtn5"></span>
+            <span class="crsBtn6"></span>
+            <span class="crsBtn7"></span>
+            <span class="crsBtn8"></span>
+        </div>
+
+        <script src="js/jquery-3.2.1.js"></script>
+        <script>
+            $(function(){
+            //变量与函数声明
+                //变量
+                
+                let i=0;
+                let $bg=$("#bg");
+                let $moon=$(".bgMoon");
+                let $flower=$(".bgBtm>.bgFlower")
+                let $view=$("#view");
+                let $japanese=$("#view>.viewAll>.viewLeft>.Japanese");
+                let $carousel=$(".view>.viewAll>.carousel");
+                let $crsBtns=$(".crsBtns");
+                let bodyW=$("body").prop("clientWidth");
+                let crsStart=6600-762/2-(bodyW+762)/2;
+                let carouselW=$carousel.css("width");
+                let spaceW=(carouselW.split("p")[0]-762*7)/6
+                //函数
+                function labelPath(n){
+                    let numI=0;
+                    if(n==2){
+                        numI=-1680;
+                    }else if(n==3){
+                        numI=-3000;
+                    }
+                    let arr=[];
+                    let $lbs=$(`.view>.viewAll>.viewLeft>.labels>div:nth-child(${n})`);
+                    for(let i=0;i<8;i++){
+                        arr[i]=$lbs.children(`:nth-child(${i+1})`);
+                    }
+                    [$lb1,$lb2,$lb3,$lb4,$lb5,$lb6,$lb7,$lb8]=arr;
+                    //标签鼠标滚动时的样式
+                    if(i<0 && i>-crsStart){
+                        $lb1.css("transform",`translateX(${-(i-numI)/3}px)  translateY(${(i-numI)/4}px) rotate(${-(i-numI)}deg)`).children().css("transform",`scale(${0.5-(i-numI)/1200/8})`)
+                        $lb2.css("transform",`translateX(${-(i-numI)/3}px)  translateY(${-(i-numI)/4}px) rotate(${-(i-numI)}deg)`).children().css("transform",`scale(${0.5-(i-numI)/1200/8})`)
+                        $lb3.css("transform",`translateX(${-(i-numI)/2}px)  translateY(${(i-numI)/3}px) rotate(${-(i-numI)}deg)`).children().css("transform",`scale(${0.5-(i-numI)/1200/4})`)
+                        $lb4.css("transform",`translateX(${-(i-numI)/2}px)  translateY(${-(i-numI)/3}px) rotate(${-(i-numI)}deg)`).children().css("transform",`scale(${0.5-(i-numI)/1200/4})`)
+                        $lb5.css("transform",`translateX(${-(i-numI)/2}px)  translateY(${(i-numI)/5}px) rotate(${(i-numI)}deg)`).children().css("transform",`scale(${0.5-(i-numI)/1200/4})`)
+                        $lb6.css("transform",`translateX(${-(i-numI)/2}px)  translateY(${-(i-numI)/5}px) rotate(${(i-numI)}deg)`).children().css("transform",`scale(${0.5-(i-numI)/1200/4})`)
+                        $lb7.css("transform",`translateX(${-(i-numI)/3}px)  translateY(${(i-numI)/10}px) rotate(${(i-numI)}deg)`).children().css("transform",`scale(${0.5-(i-numI)/1200/8})`)
+                        $lb8.css("transform",`translateX(${-(i-numI)/3}px)  translateY(${-(i-numI)/10}px) rotate(${(i-numI)}deg)`).children().css("transform",`scale(${0.5-(i-numI)/1200/8})`)
+                    }
+                    //标签(父元素)透明度
+                    $lbs.css("opacity",`${-(i-numI)/120}`)
+                }
+                //滚动函数
+                function wheel(){
+                    //背景平移
+                    let moveNormal=`translateX(${parseInt(i/2)}px)`;
+                    $view.children().css("transform",moveNormal);
+                    $bg.children(":nth-child(2)").css("transform",moveNormal)
+                        .next().css("transform",`translateX(${parseInt(i/1.70)}px)`);
+                    $moon.css("transform",moveNormal);
+                    //升起的月亮1
+                    if(i<-5000){
+                        $moon.children(":first").css("transform","translateY(0px)");
+                    }
+                    //升起的月亮2与花
+                    if(i<-11160){
+                        $moon.children(":last").css("transform","translateY(0px)");
+                        $flower.css("transform","scale(1.0)")
+                    }
+                    //标签路径控制
+                    labelPath(1);
+                    if(i<=-1560){
+                        labelPath(2);  
+                    }
+                    if(i<=-2880){
+                        labelPath(3);
+                    }
+                    //轮播元素控制
+                    console.log(carouselW)
+                    if(i<=0 && i>-crsStart+762){
+                        $crsBtns.children(":nth-child(1)").addClass("on")
+                        .siblings().removeClass("on")
+                        $carousel.children().removeClass("crsShow")
+                    }
+                    if(i<=-crsStart && i>-crsStart-(762+spaceW)*2){
+                        $crsBtns.children(":nth-child(2)").addClass("on")
+                        .siblings().removeClass("on")
+                        $carousel.children(":nth-child(1)").addClass("crsShow")
+                        .siblings().removeClass("crsShow");
+                    }
+                    if(i<=-crsStart-(762+spaceW)*2 && i>-crsStart-(762+spaceW)*4){
+                        $crsBtns.children(":nth-child(3)").addClass("on")
+                        .siblings().removeClass("on")
+                        $carousel.children(":nth-child(2)").addClass("crsShow")
+                        .siblings().removeClass("crsShow")
+                    }
+                    if(i<=-crsStart-(762+spaceW)*4 && i>-crsStart-(762+spaceW)*6){
+                        $crsBtns.children(":nth-child(4)").addClass("on")
+                        .siblings().removeClass("on")
+                        $carousel.children(":nth-child(3)").addClass("crsShow")
+                        .siblings().removeClass("crsShow")
+                    }
+                    if(i<=-crsStart-(762+spaceW)*6 && i>-crsStart-(762+spaceW)*8){
+                        $crsBtns.children(":nth-child(5)").addClass("on")
+                        .siblings().removeClass("on")
+                        $carousel.children(":nth-child(4)").addClass("crsShow")
+                        .siblings().removeClass("crsShow")
+                    }
+                    if(i<=-crsStart-(762+spaceW)*8 && i>-crsStart-(762+spaceW)*10){
+                        $crsBtns.children(":nth-child(6)").addClass("on")
+                        .siblings().removeClass("on")
+                        $carousel.children(":nth-child(5)").addClass("crsShow")
+                        .siblings().removeClass("crsShow")
+                    }
+                    if(i<=-crsStart-(762+spaceW)*10 && i>-crsStart-(762+spaceW)*12){
+                        $crsBtns.children(":nth-child(7)").addClass("on")
+                        .siblings().removeClass("on")
+                        $carousel.children(":nth-child(6)").addClass("crsShow")
+                        .siblings().removeClass("crsShow")
+                    }
+                    if(i<=-crsStart-(762+spaceW)*12 && i>-crsStart-(762+spaceW)*14){
+                        $crsBtns.children(":nth-child(8)").addClass("on")
+                        .siblings().removeClass("on")
+                        $carousel.children(":nth-child(7)").addClass("crsShow")
+                        .siblings().removeClass("crsShow")
+                    }
+                    if(i<=-crsStart-(762+spaceW)*14){
+                        $(".view>.viewAll>.carousel").children().removeClass("crsShow");
+                    }
+                }
+            //加载后执行的动画
+                $(".view>.viewAll>.viewLeft>.labelContainer").css("transform","translateX(0px)").css("opacity","1");
+                $(".leftTitle").css("transform","translateY(0px)").css("opacity","1");
+                $(".view>.viewAll>.viewLeft>.title>.desc").css("transform","translateY(0px)").css("opacity","1")
+                .next().css("opacity","1");
+            //各种滚动移动
+            document.body.onmousewheel=function(e){
+                console.log(e.wheelDelta);
+                i+=e.wheelDelta;
+                console.log(i);             
+                if(i<=0 && i>=-16800){
+                    wheel();
+                }else if(i>0){
+                    i=-120;
+                }else{
+                    i=-16680
+                }
+            }
+            //左侧闪烁的日本字
+            $japanese.children().each(function(i,elem){
+                let $this=$(this)
+                setInterval(()=>{
+                    $this.toggleClass("fade")
+                },Math.round(Math.random()*5000+200))
+            })
+             //"了解更多"圆的移动
+            $carousel.children().children(":last-child").on("mousemove",function(e){                 
+                let x=e.offsetX,y=e.offsetY;
+                let left=x-50,top=y-50;
+                if(left<0){left=0}
+                if(left>70){left=70}
+                if(top<0){top=0}
+                if(top>60){top=60}
+                let $moreTpl=$(this);
+                $moreTpl.prev().children(".mk").css("left",`${left}px`).css("top",`${top}px`)
+            })
+            //轮播控制器点击事件
+            $crsBtns.children().each(function(i2,elem){
+                let $this=$(this);
+                $this.click(()=>{
+                    if(i2==0){
+                        i=0;
+                    }else{
+                        i=-crsStart-(762+spaceW)*2*(i2-1)-380
+                    }
+                    //调用滚动函数
+                    wheel();
+                })
+            })
+        })
+        </script>
+	</body>
+</html>
